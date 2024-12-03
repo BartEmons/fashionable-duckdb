@@ -8,7 +8,8 @@ with int_orders_grouped as (
         ship_city,
         ship_state,
         ship_country,
-        sum(amount) as total_order_amount,
+        ship_postal_code,
+        round(sum(amount), 2) as total_order_amount,
         sum(quantity) as total_order_quantity
     from {{ ref('stg_fashionable__sales') }}
     group by all
