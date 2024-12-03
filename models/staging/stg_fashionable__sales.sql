@@ -2,7 +2,21 @@ with source as (
     select * from {{ ref('fashionable') }}
 ),
 
-raw_sales as (
+filtered_sales as (
+    select *
+    from source
+    where 
+        ("Order ID" is not null)
+        and ("Date" is not null)
+        and ("Qty" is not null)
+        and ("SKU" is not null)
+        and ("ship-city" is not null)    
+        and ("ship-state" is not null)
+        and ("ship-postal-code" is not null)
+        and ("ship-country" is not null)
+),
+
+sales as (
     select
         cast(index as int) as row_id,
         cast("Order ID" as varchar) as order_id,
@@ -30,7 +44,7 @@ raw_sales as (
             when 'B2B' = 'False' then false
         end::boolean as b2b,
         cast("fulfilled-by" as varchar) as fulfilled_by
-    from source
+    from filtered_sales
 )
 
-select * from raw_sales
+select * from sales
