@@ -1,0 +1,99 @@
+version: 2
+
+models:
+  - name: int_locations_deduplicated
+    columns:
+      - name: ship_city
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+      - name: ship_state
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+      - name: ship_postal_code
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+      - name: ship_country
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+  - name: int_orders_grouped
+    columns: 
+      - name: order_id
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+          - unique
+      - name: order_date
+        data_type: date
+        description: ""
+        data_tests:
+          - not_null
+      - name: order_status
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Cancelled', 'Shipped - Delivered to Buyer', 'Shipped', 'Shipped - Returned to Seller', 'Shipped - Rejected by Buyer', 'Shipped - Lost in Transit', 'Shipped - Out for Delivery', 'Shipped - Returning to Seller', 'Shipped - Picked Up', 'Pending', 'Pending - Waiting for Pick Up', 'Shipped - Damaged', 'Shipping'] 
+      - name: fulfilment_channel
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Merchant', 'Fashionable']
+      - name: sales_channel
+        data_type: varchar
+        description: "" 
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Fashionable.in', 'Non-Fashionable']
+
+  - name: int_products_grouped
+    columns:
+      - name: sku
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+          - unique
+      - name: style
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+      - name: category
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+      - name: size
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+      - name: asin
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+      - name: total_sku_quantity
+        data_type: int
+        description: ""
+        data_tests:
+          - not_null
+      - name: total_sku_sales
+        data_type: float
+        description: ""
+        data_tests:
+          - not_null

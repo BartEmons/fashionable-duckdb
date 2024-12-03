@@ -1,0 +1,8 @@
+fashionable:
+
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: 'fashionable.duckdb'
+      threads: 24
